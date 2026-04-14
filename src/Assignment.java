@@ -60,6 +60,7 @@ public class Assignment
         this.assignmentLength = assignmentLength;
     }
 
+    @Override
     public String toString()
     {
         return "Assignment Name: " + name + "\nDue Date: " + monthDue + "/" + dayDue + "\nImportance Level: " + importanceLevel + "\nTime to complete: " + assignmentLength;

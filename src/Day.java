@@ -32,5 +32,16 @@ public class Day
         assignmentList.add(assignment1);
     }
 
+    @Override
+    public String toString()
+    {
+        String returnString = name;
+        for(int i = 0; i < assignmentList.size(); i++)
+        {
+            returnString += "\n" + assignmentList.get(i).getName();
+        }
+        return returnString;
+    }
+
 
 }
