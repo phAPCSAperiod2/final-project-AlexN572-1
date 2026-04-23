@@ -18,7 +18,7 @@ public class Calendar {
             }
         }
 
-        if(name.toLowerCase().equals("febuary"))
+        if(name.toLowerCase().equals("february"))
         {
             for(int i = 1; i <= 28; i++)
             {
@@ -116,6 +116,24 @@ public class Calendar {
                 dayList.add(day1);
             }
         }
+
+    }
+
+    public void addAssignmentToDay(Assignment assignment1, int numDay)
+    {
+        dayList.get(numDay - 1).addAssignment(assignment1);
+    }
+
+    @Override
+    public String toString()
+    {
+        String returnString = "";
+        for(int i = 0; i < dayList.size(); i++)
+        {
+            returnString += dayList.get(i).toString() + "\n";
+        }
+        return returnString;
     }
 
 }
+
