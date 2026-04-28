@@ -124,6 +124,17 @@ public class Calendar {
         dayList.get(numDay - 1).addAssignment(assignment1);
     }
 
+    public void addToMultipleDays(Assignment assignment1, int startDay, int endDay)
+    {
+        if((startDay < endDay)&&(startDay < dayList.size())&&(endDay < dayList.size()))
+        {
+            for(int i = startDay - 1; i < endDay; i++)
+            {
+                dayList.get(i).addAssignment(assignment1);
+            }
+        }
+    }
+
     @Override
     public String toString()
     {

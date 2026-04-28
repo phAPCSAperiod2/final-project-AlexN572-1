@@ -35,10 +35,10 @@ public class Day
     @Override
     public String toString()
     {
-        String returnString = name + ":";
+        String returnString = name + ": ";
         for(int i = 0; i < assignmentList.size(); i++)
         {
-            returnString += "\n" + assignmentList.get(i).getName();
+            returnString += "|" + assignmentList.get(i).getName() + "|";
         }
         return returnString;
     }
