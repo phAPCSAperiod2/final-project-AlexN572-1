@@ -4,15 +4,13 @@ public class Assignment
     private String name;
     private int dayDue;
     private int monthDue;
-    private int importanceLevel;
     private int assignmentLength;
 
-    public Assignment(String name, int dayDue, int monthDue, int importanceLevel, int assignmentLength)
+    public Assignment(String name, int dayDue, int monthDue, int assignmentLength)
     {
         this.name = name;
         this.dayDue = dayDue;
         this.monthDue = monthDue;
-        this.importanceLevel = importanceLevel;
         this.assignmentLength = assignmentLength;
     }
 
@@ -28,10 +26,6 @@ public class Assignment
     public int getMonthDue()
     {
         return monthDue;
-    }
-    public int getImportanceLevel()
-    {
-        return importanceLevel;
     }
     public int getAssignmentLength()
     {
@@ -50,10 +44,6 @@ public class Assignment
     public void setMonthDue(int monthDue)
     {
         this.monthDue = monthDue;
-    }
-    public void setImportanceLevel(int importanceLevel)
-    {
-        this.importanceLevel = importanceLevel;
     }
     public void setAssignmentLength(int assignmentLength)
     {
