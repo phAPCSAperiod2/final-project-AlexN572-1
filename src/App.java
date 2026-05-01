@@ -4,13 +4,6 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner input = new Scanner(System.in);
-        System.out.println("Welcome to the Assignment Scheduler");
-        System.out.println("What is the date today?");
-        System.out.println("Month:");
-        int numMonth = input.nextInt();
-        System.out.println("Day:");
-        int numDay = input.nextInt();
-        input.nextLine();
 
         ArrayList<Calendar> year= new ArrayList<Calendar>();
         Calendar calendar1 = new Calendar("january");
@@ -40,41 +33,81 @@ public class App {
         year.add(calendar12);
 
 
-        boolean keepUsing = true;
-        while(keepUsing)
+        System.out.println("Welcome to the Assignment Scheduler");
+        boolean keepPlaying = true;
+        while(keepPlaying)
         {
-            System.out.println("What would you like to do:\n1. See Calendar\n2. Add Assignment\n3. Quit");
-            int menuOption = input.nextInt();
+            System.out.println("What is the date today?");
+            System.out.println("Month:");
+            int numMonth = input.nextInt();
+            System.out.println("Day:");
+            int numDay = input.nextInt();
             input.nextLine();
-            if(menuOption == 1)
-            {
-                for(int i = 0; i < 12; i++)
-                {
-                    System.out.println(year.get(i).toString());
-                }
-            }
-            else if(menuOption == 2)
-            {
-                System.out.print("What is the name of your assignment: ");
-                String assignmentName = input.nextLine();
-                System.out.print("What month is the assignment due: ");
-                int monthDue = input.nextInt();
-                System.out.print("What day is it due: ");
-                int dayDue = input.nextInt();
-                System.out.print("How many days will it take to complete: ");
-                int daysToComplete = input.nextInt();
 
-                Assignment assignment1 = new Assignment(assignmentName, dayDue, monthDue, daysToComplete);
-
-                if((numDay + daysToComplete) > year.get(numMonth - 1).getList().size())
+            boolean keepUsing = true;
+            while(keepUsing)
+            {
+                System.out.println("What would you like to do:\n1. See Calendar\n2. Add Assignment\n3. End Day\n4. Quit");
+                int menuOption = input.nextInt();
+                input.nextLine();
+                if(menuOption == 1)
                 {
-                    int endMonth = numMonth + 1;
-                    int endDay = (numDay + daysToComplete) - (year.get(numMonth - 1).getList().size());
-                    if((endMonth >= monthDue)&&(endDay > dayDue))
+                    for(int i = 0; i < 12; i++)
                     {
-                        year.get(numMonth - 1).addToMultipleDays(assignment1, numDay, year.get(numMonth - 1).getList().size());
-                        year.get(numMonth).addToMultipleDays(assignment1, 1, dayDue);
+                        System.out.println(year.get(i).toString());
                     }
+                }
+                else if(menuOption == 2)
+                {
+                    System.out.print("What is the name of your assignment: ");
+                    String assignmentName = input.nextLine();
+                    System.out.print("What month is the assignment due: ");
+                    int monthDue = input.nextInt();
+                    System.out.print("What day is it due: ");
+                    int dayDue = input.nextInt();
+                    System.out.print("How many days will it take to complete: ");
+                    int daysToComplete = input.nextInt();
+                    input.nextLine();
+
+                    Assignment assignment1 = new Assignment(assignmentName, dayDue, monthDue, daysToComplete);
+
+                    if((numDay + daysToComplete) > year.get(numMonth - 1).getList().size())
+                    {
+                        int endMonth = numMonth + 1;
+                        int endDay = (numDay + daysToComplete) - (year.get(numMonth - 1).getList().size());
+                        if((endMonth >= monthDue)&&(endDay > dayDue))
+                        {
+                            year.get(numMonth - 1).addToMultipleDays(assignment1, numDay, year.get(numMonth - 1).getList().size() - 1);
+                            year.get(numMonth - 1).addAssignmentToDay(assignment1, year.get(numMonth - 1).getList().size());
+                            year.get(numMonth).addToMultipleDays(assignment1, 1, dayDue);
+                        }
+                        else
+                        {
+                            year.get(numMonth -1).addToMultipleDays(assignment1, numDay, year.get(numMonth - 1).getList().size() - 1);
+                            year.get(numMonth - 1).addAssignmentToDay(assignment1, year.get(numMonth - 1).getList().size());
+                            year.get(numMonth).addToMultipleDays(assignment1, 1, endDay - 1);
+                        }
+                    }
+                    else
+                    {
+                        if(numDay + daysToComplete > dayDue)
+                        {
+                            year.get(numMonth - 1).addToMultipleDays(assignment1, numDay, dayDue);
+                        }
+                        else
+                        {
+                            year.get(numMonth - 1).addToMultipleDays(assignment1, numDay, numDay + daysToComplete - 1);
+                        }
+                    }
+                }
+                else if(menuOption == 3)
+                {
+                    keepUsing = false;
+                }
+                else
+                {
+                    keepUsing = false;
+                    keepPlaying = false;
                 }
             }
         }
