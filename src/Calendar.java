@@ -132,18 +132,34 @@ public class Calendar {
 
     }
 
-    public void addAssignmentToDay(Assignment assignment1, int numDay)
+    public boolean addAssignmentToDay(Assignment assignment1, int numDay)
     {
-        dayList.get(numDay - 1).addAssignment(assignment1);
+        if(dayList.get(numDay- - 1).getAssignmentList().size() <= 4)
+        {
+            dayList.get(numDay - 1).addAssignment(assignment1);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
     }
 
-    public void addToMultipleDays(Assignment assignment1, int startDay, int endDay)
+    public void addToMultipleDays(Assignment assignment1, int startDay, int endDay, int dueDate)
     {
         if((startDay < endDay)&&(startDay < dayList.size())&&(endDay < dayList.size()))
         {
             for(int i = startDay - 1; i < endDay; i++)
             {
-                dayList.get(i).addAssignment(assignment1);
+                if(dayList.get(i).getAssignmentList().size() < 4)
+                {
+                   dayList.get(i).addAssignment(assignment1);
+                }
+                else if(endDay < dueDate)
+                {
+                    endDay++;
+                }
             }
         }
     }

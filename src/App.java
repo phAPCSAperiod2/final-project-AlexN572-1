@@ -77,26 +77,26 @@ public class App {
                         int endDay = (numDay + daysToComplete) - (year.get(numMonth - 1).getList().size());
                         if((endMonth >= monthDue)&&(endDay > dayDue))
                         {
-                            year.get(numMonth - 1).addToMultipleDays(assignment1, numDay, year.get(numMonth - 1).getList().size() - 1);
+                            year.get(numMonth - 1).addToMultipleDays(assignment1, numDay, year.get(numMonth - 1).getList().size() - 1, year.get(numMonth - 1).getList().size() - 1);
                             year.get(numMonth - 1).addAssignmentToDay(assignment1, year.get(numMonth - 1).getList().size());
-                            year.get(numMonth).addToMultipleDays(assignment1, 1, dayDue);
+                            year.get(numMonth).addToMultipleDays(assignment1, 1, dayDue, dayDue);
                         }
                         else
                         {
-                            year.get(numMonth -1).addToMultipleDays(assignment1, numDay, year.get(numMonth - 1).getList().size() - 1);
+                            year.get(numMonth -1).addToMultipleDays(assignment1, numDay, year.get(numMonth - 1).getList().size() - 1, year.get(numMonth - 1).getList().size() - 1);
                             year.get(numMonth - 1).addAssignmentToDay(assignment1, year.get(numMonth - 1).getList().size());
-                            year.get(numMonth).addToMultipleDays(assignment1, 1, endDay - 1);
+                            year.get(numMonth).addToMultipleDays(assignment1, 1, endDay - 1, dayDue);
                         }
                     }
                     else
                     {
                         if(numDay + daysToComplete > dayDue)
                         {
-                            year.get(numMonth - 1).addToMultipleDays(assignment1, numDay, dayDue);
+                            year.get(numMonth - 1).addToMultipleDays(assignment1, numDay, dayDue, dayDue);
                         }
                         else
                         {
-                            year.get(numMonth - 1).addToMultipleDays(assignment1, numDay, numDay + daysToComplete - 1);
+                            year.get(numMonth - 1).addToMultipleDays(assignment1, numDay, numDay + daysToComplete - 1, dayDue);
                         }
                     }
                 }
