@@ -38,20 +38,22 @@ public class App {
         while(keepPlaying)
         {
             System.out.println("What is the date today?");
-            System.out.println("Month:");
+            System.out.print("Month: ");
             int numMonth = input.nextInt();
-            System.out.println("Day:");
+            System.out.print("Day: ");
             int numDay = input.nextInt();
             input.nextLine();
 
             boolean keepUsing = true;
             while(keepUsing)
             {
-                System.out.println("What would you like to do:\n1. See Calendar\n2. Add Assignment\n3. End Day\n4. Quit");
+                System.out.println();
+                System.out.print("What would you like to do:\n=========================\n1. See Calendar\n2. Add Assignment\n3. End Day\n4. Quit\n=========================\nYour option: ");
                 int menuOption = input.nextInt();
                 input.nextLine();
                 if(menuOption == 1)
                 {
+                    System.out.println();
                     for(int i = 0; i < 12; i++)
                     {
                         System.out.println(year.get(i).toString());
@@ -71,10 +73,15 @@ public class App {
 
                     Assignment assignment1 = new Assignment(assignmentName, dayDue, monthDue, daysToComplete);
 
-                    if((numDay + daysToComplete) > year.get(numMonth - 1).getList().size())
+                    if(daysToComplete == 1)
+                    {
+                        boolean added = false;
+                        while(year.get(numMonth - 1).getList().get(numDay + i))
+                    }
+                    else if((numDay + daysToComplete + year.get(numMonth - 1).checkMaxDays(numDay, year.get(numMonth - 1).getList().size()) + year.get(numMonth).checkMaxDays(numDay, year.get(numMonth).getList().size()) ) > year.get(numMonth - 1).getList().size())
                     {
                         int endMonth = numMonth + 1;
-                        int endDay = (numDay + daysToComplete) - (year.get(numMonth - 1).getList().size());
+                        int endDay = (numDay + daysToComplete+ year.get(numMonth - 1).checkMaxDays(numDay, year.get(numMonth - 1).getList().size()) + year.get(numMonth).checkMaxDays(numDay, year.get(numMonth).getList().size())) - (year.get(numMonth - 1).getList().size());
                         if((endMonth >= monthDue)&&(endDay > dayDue))
                         {
                             year.get(numMonth - 1).addToMultipleDays(assignment1, numDay, year.get(numMonth - 1).getList().size() - 1, year.get(numMonth - 1).getList().size() - 1);
@@ -111,6 +118,8 @@ public class App {
                 }
             }
         }
+
+        System.out.println("Thank you for using the Assignment Calendar!");
 
 
 

@@ -134,7 +134,7 @@ public class Calendar {
 
     public boolean addAssignmentToDay(Assignment assignment1, int numDay)
     {
-        if(dayList.get(numDay- - 1).getAssignmentList().size() <= 4)
+        if(dayList.get(numDay - 1).getAssignmentList().size() <= 4)
         {
             dayList.get(numDay - 1).addAssignment(assignment1);
             return true;
@@ -172,6 +172,19 @@ public class Calendar {
     public ArrayList<Day> getList()
     {
         return dayList;
+    }
+
+    public int checkMaxDays(int startingPoint, int endingPoint)
+    {
+        int returnValue = 0;
+        for(int i = startingPoint - 1; i < endingPoint; i++)
+        {
+            if(dayList.get(i).getAssignmentList().size() >= 4)
+            {
+                returnValue++;
+            }
+        }
+        return returnValue;
     }
 
     @Override
