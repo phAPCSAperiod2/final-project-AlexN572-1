@@ -73,10 +73,30 @@ public class App {
 
                     Assignment assignment1 = new Assignment(assignmentName, dayDue, monthDue, daysToComplete);
 
-                    if(daysToComplete == 1)
+                    if((daysToComplete == 1)||((monthDue == numMonth)&&(dayDue == numDay)))
                     {
                         boolean added = false;
-                        while(year.get(numMonth - 1).getList().get(numDay + i))
+                        int i = 0;
+                        while(!added)
+                        {
+                            if(year.get(numMonth - 1).getList().get(numDay + i).getAssignmentList().size() >= 4)
+                            {
+                                i++;
+                            }
+                            else
+                            {
+                                if(i > 0)
+                                {
+                                    year.get(numMonth - 1).addAssignmentToDay(assignment1, numDay + i + 1);
+                                    added = true;
+                                }
+                                else
+                                {
+                                    year.get(numMonth - 1).addAssignmentToDay(assignment1, numDay + i);
+                                    added = true;
+                                }
+                            }
+                        }
                     }
                     else if((numDay + daysToComplete + year.get(numMonth - 1).checkMaxDays(numDay, year.get(numMonth - 1).getList().size()) + year.get(numMonth).checkMaxDays(numDay, year.get(numMonth).getList().size()) ) > year.get(numMonth - 1).getList().size())
                     {
