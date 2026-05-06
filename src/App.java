@@ -32,6 +32,19 @@ public class App {
         year.add(calendar11);
         year.add(calendar12);
 
+        String[][] yearArray = new String[32][13];
+        for(int i = 1; i < 13; i++)
+        {
+            yearArray[0][i] = (Str)i;
+        }
+        for(int col = 1; col < 13; col++)
+        {
+            for(int row = 1; row < 32; row ++)
+            {
+                yearArray[row][col] = " # ";
+            }
+        }
+
 
         System.out.println("Welcome to the Assignment Scheduler");
         boolean keepPlaying = true;
