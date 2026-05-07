@@ -32,18 +32,19 @@ public class App {
         year.add(calendar11);
         year.add(calendar12);
 
-        String[][] yearArray = new String[32][13];
-        for(int i = 1; i < 13; i++)
+        String[][] yearArray = new String[12][128];
+        for(int i = 0; i < 12; i++)
         {
-            yearArray[0][i] = (Str)i;
+            yearArray[i][0] = String.valueOf(i + 1);
         }
-        for(int col = 1; col < 13; col++)
+        for(int row = 0; row < 12; row++)
         {
-            for(int row = 1; row < 32; row ++)
+            for(int col = 1; col < 128; col++)
             {
-                yearArray[row][col] = " # ";
+                yearArray[row][col] = null;
             }
         }
+
 
 
         System.out.println("Welcome to the Assignment Scheduler");
@@ -61,7 +62,7 @@ public class App {
             while(keepUsing)
             {
                 System.out.println();
-                System.out.print("What would you like to do:\n=========================\n1. See Calendar\n2. Add Assignment\n3. End Day\n4. Quit\n=========================\nYour option: ");
+                System.out.print("What would you like to do:\n=========================\n1. See Calendar\n2. Add Assignment\n3. See All Assignments\n4. End Day\n5. Quit\n=========================\nYour option: ");
                 int menuOption = input.nextInt();
                 input.nextLine();
                 if(menuOption == 1)
@@ -139,8 +140,31 @@ public class App {
                             year.get(numMonth - 1).addToMultipleDays(assignment1, numDay, numDay + daysToComplete - 1, dayDue);
                         }
                     }
+                    for(int j = 0; j < 128; j++)
+                    {
+                        if(yearArray[monthDue - 1][j] == null)
+                        {
+                            yearArray[monthDue - 1][j] = "|" + assignment1.getName() + "|";
+                            j = 128;
+                        }
+                    }
                 }
                 else if(menuOption == 3)
+                {
+                    System.out.println();
+                    for(int row = 0; row < 12; row++)
+                    {
+                        for(int col = 0; col < 128; col++)
+                        {
+                            if(yearArray[row][col] != null)
+                            {
+                                System.out.print(yearArray[row][col] + " ");
+                            }
+                        }
+                        System.out.println();
+                    }
+                }
+                else if(menuOption == 4)
                 {
                     keepUsing = false;
                 }
