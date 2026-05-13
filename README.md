@@ -124,6 +124,79 @@ Represents an assignment with:
    - End the day to progress
 4. Program continues until user quits
 
+### Class Diagram
+
+```
+┌─────────────────────────────────────────┐
+│           App (main driver)             │
+├─────────────────────────────────────────┤
+│ - year: ArrayList<Calendar>             │
+│ - yearArray: String[12][128]            │
+│ - input: Scanner                        │
+├─────────────────────────────────────────┤
+│ + main(args: String[]): void            │
+│ + displayCalendars(): void              │
+│ + addAssignment(): void                 │
+│ + displayAllAssignments(): void         │
+└────────────┬────────────────────────────┘
+             │ manages (1 to *)
+             ▼
+┌─────────────────────────────────────────┐
+│         Calendar                        │
+├─────────────────────────────────────────┤
+│ - name: String                          │
+│ - number: int                           │
+│ - dayList: ArrayList<Day>               │
+├─────────────────────────────────────────┤
+│ + Calendar(name: String)                │
+│ + getName(): String                     │
+│ + getNumber(): int                      │
+│ + getList(): ArrayList<Day>             │
+│ + toString(): String                    │
+└────────────┬────────────────────────────┘
+             │ contains (1 to *)
+             ▼
+┌─────────────────────────────────────────┐
+│           Day                           │
+├─────────────────────────────────────────┤
+│ - name: String                          │
+│ - assignmentList: ArrayList<Assignment> │
+├─────────────────────────────────────────┤
+│ + Day(name: String)                     │
+│ + getName(): String                     │
+│ + getAssignmentList(): ArrayList        │
+│ + setName(name: String): void           │
+│ + addAssignment(Assignment): void       │
+│ + toString(): String                    │
+└────────────┬────────────────────────────┘
+             │ holds (0 to *)
+             ▼
+┌─────────────────────────────────────────┐
+│         Assignment                      │
+├─────────────────────────────────────────┤
+│ - name: String                          │
+│ - dayDue: int                           │
+│ - monthDue: int                         │
+│ - assignmentLength: int                 │
+├─────────────────────────────────────────┤
+│ + Assignment(name, dayDue, monthDue,    │
+│             assignmentLength)           │
+│ + getName(): String                     │
+│ + getDayDue(): int                      │
+│ + getMonthDue(): int                    │
+│ + getAssignmentLength(): int            │
+│ + setName(String): void                 │
+│ + setDayDue(int): void                  │
+│ + setMonthDue(int): void                │
+│ + setAssignmentLength(int): void        │
+└─────────────────────────────────────────┘
+```
+
+**Relationships:**
+- **App → Calendar**: One-to-many relationship. App maintains a list of 12 Calendar objects (one for each month)
+- **Calendar → Day**: One-to-many relationship. Each Calendar contains a list of Day objects (28-31 depending on the month)
+- **Day → Assignment**: One-to-many relationship. Each Day maintains a list of Assignment objects scheduled for that day
+
 ---
 
 ## Technical Requirements Met
